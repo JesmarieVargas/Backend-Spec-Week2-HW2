@@ -1,6 +1,6 @@
-from database import db #services interact directly with the db
-from models.order import Order #need this to create order objects
-from sqlalchemy import select #so we can query our db
+from database import db 
+from models.order import Order 
+from sqlalchemy import select 
 from models.product import Product
 
 
@@ -14,8 +14,8 @@ def save(order_data):
     return new_order
 
 
-def find_all():
+def find_all(page=1, per_page=10):
     query = select(Order)
-    all_orders = db.session.execute(query).scalars().all()
+    all_orders = db.paginate(query, page=int(page), per_page=int(per_page))
 
     return all_orders
