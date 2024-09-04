@@ -1,13 +1,13 @@
-from database import db #services interact directly with the db
-from models.product import Product #need this to create customer objects
-from sqlalchemy import select #so we can query our db
+from database import db 
+from models.product import Product
+from sqlalchemy import select 
 
 
 def save(product_data):
 
     new_product = Product(name=product_data['name'], price=product_data['price'])
     db.session.add(new_product)
-    db.session.commit() #adding our new customer to our db
+    db.session.commit() 
 
     db.session.refresh(new_product)
     return new_product

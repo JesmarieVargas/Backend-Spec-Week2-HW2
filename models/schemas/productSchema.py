@@ -10,4 +10,4 @@ class ProductSchema(ma.Schema): #Inherting our instance of Marshmallow
         fields = ("id", "name", "price") #all fields that could be coming in and going out when validating data
 
 product_schema = ProductSchema() #instantiate a single customer schema
-products_schema = ProductSchema(many=True, exclude=["password"])
+products_schema = ProductSchema(many=True)

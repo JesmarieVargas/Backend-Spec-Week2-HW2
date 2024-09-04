@@ -13,8 +13,8 @@ def save(): #name the controller the same as the service it recruites
     except ValidationError as e:
         return jsonify(e.messages), 400 #return error message with a 400 failed response
     
-    product = productService.save(product_data)
-    return product_schema.jsonify(product), 201 #send them the customer object with a 201 successful creation status
+    new_product = productService.save(product_data)
+    return product_schema.jsonify(new_product), 201 #send them the customer object with a 201 successful creation status
 
 
 @cache.cached(timeout=120)

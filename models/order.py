@@ -16,9 +16,9 @@ class Order(Base):
     __tablename__ = 'orders'
 
     id: Mapped[int] = mapped_column(primary_key=True) #primary keys auto increment
-    customer_id: Mapped[str] = mapped_column(db.Integer(100), nullable=False, unique=True)
-    product_id: Mapped[str] = mapped_column(db.Integer(2), nullable=False, unique=True)
-    quantity: Mapped[str] = mapped_column(db.Integer(1), nullable=False)
+    customer_id: Mapped[int] = mapped_column(db.ForeignKey("customers.id"))
+    product_id: Mapped[int] = mapped_column(db.Integer(), nullable=False, unique=True)
+    quantity: Mapped[str] = mapped_column(db.Integer(), nullable=False)
 
     # create our many-one relationship to the customer table
     customer: Mapped['Customer'] = db.relationship(back_populates='orders')
