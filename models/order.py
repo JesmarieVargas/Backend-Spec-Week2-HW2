@@ -1,8 +1,8 @@
 from database import db, Base
 from sqlalchemy.orm import Mapped, mapped_column
 from typing import List
-# from models.customer import Customer
-# from models.product import Product
+from models.customer import Customer
+from models.product import Product
 
 
 order_products = db.Table(
