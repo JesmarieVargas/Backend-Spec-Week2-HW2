@@ -7,7 +7,7 @@ from cache import cache
 from utils.util import admin_required, user_validation
 
 
-def save(): 
+def save(token_id): 
 
     try:
         order_data = order_schema.load(request.json)

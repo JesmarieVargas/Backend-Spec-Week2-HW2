@@ -4,6 +4,7 @@ from services import customerService
 from marshmallow import ValidationError
 from cache import cache
 from utils.util import token_required
+from models.shoppingCart import cart
 
 
 def save(): #name the controller the same as the service it recruites
@@ -47,7 +48,7 @@ def login():
     else:
         return jsonify({"status": "error", "message": "invalid username or password"}), 404
     
-    @token_required   
+@token_required   
 def add_item_to_cart():
     try:
         item_data = request.json
@@ -71,7 +72,6 @@ def view_cart():
     except ValidationError as e:
         return jsonify(e.messages), 400
     cart = customerService.view_cart(item_data)
-    print(cart)
     return cart, 200
     
 @token_required
@@ -91,4 +91,5 @@ def place_order():
     except ValidationError as e:
         return jsonify(e.messages), 400
     order = customerService.place_order(item_data)
+    return jsonify({"status": "success", "message": "order placed"}), 200
     

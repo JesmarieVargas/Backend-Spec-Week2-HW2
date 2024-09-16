@@ -1,21 +1,22 @@
 from database import db, Base
 from sqlalchemy.orm import Mapped, mapped_column
 from typing import List
-from models.customer import Customer
-from models.product import Product
-
-
-order_products = db.Table(
-    "order_products",
-    Base.metadata, # allow this table to locate the foreign keys from the Base class
-    db.Column('order_id', db.ForeignKey('orders.id'), primary_key= True),
-    db.Column('product_id', db.ForeignKey('products.id'), primary_key= True)
-)
+# from models.customer import Customer
+# from models.product import Product
+from models.orderProduct import order_products
+from datetime import date
+# order_products = db.Table(
+#     "order_products",
+#     Base.metadata, # allow this table to locate the foreign keys from the Base class
+#     db.Column('order_id', db.ForeignKey('orders.id'), primary_key= True),
+#     db.Column('product_id', db.ForeignKey('products.id'), primary_key= True)
+# )
 
 class Order(Base):
     __tablename__ = 'orders'
 
     id: Mapped[int] = mapped_column(primary_key=True) #primary keys auto increment
+    order_date: Mapped[date] = mapped_column(db.Date, nullable= False)
     customer_id: Mapped[int] = mapped_column(db.ForeignKey("customers.id"))
     product_id: Mapped[int] = mapped_column(db.Integer(), nullable=False, unique=True)
     quantity: Mapped[str] = mapped_column(db.Integer(), nullable=False)

@@ -23,7 +23,7 @@ def token_required(f): #f = the function that our wrapper wraps around
         token = None
         if 'Authorization' in request.headers:
             try:
-                token = request.headers['Authorization'].split()[1]
+                token = request.headers['Authorization'].split()[0]
                 payload = jwt.decode(token, SECRET_KEY, algorithms='HS256') #decodeing the toke with the same mechanism we used to encode the token
                 print("Payload", payload)
             except jwt.ExpiredSignatureError:
@@ -41,7 +41,7 @@ def user_validation(f):
         token = None
         if 'Authorization' in request.headers:
             try:
-                token = request.headers['Authorization'].split()[1]
+                token = request.headers['Authorization'].split()[0]
                 payload = jwt.decode(token, SECRET_KEY, algorithms='HS256')
             except jwt.ExpiredSignatureError:
                 return jsonify({'message': 'Token has expired'}), 401 
@@ -73,7 +73,7 @@ def admin_required(f): #f = the function that our wrapper wraps around
         token = None
         if 'Authorization' in request.headers:
             try:
-                token = request.headers['Authorization'].split()[1]
+                token = request.headers['Authorization'].split()[0]
                 payload = jwt.decode(token, SECRET_KEY, algorithms='HS256') #decodeing the toke with the same mechanism we used to encode the token
                 print("Payload", payload)
             except jwt.ExpiredSignatureError:
