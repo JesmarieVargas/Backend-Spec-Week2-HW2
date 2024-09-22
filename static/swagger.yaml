@@ -164,7 +164,7 @@ paths:
                   name: "Toaster"
 
   /customers/empty-cart:
-    delete:
+    post:
       tags:
         - Cart
       summary: "Remove all products from the customer's cart"
@@ -240,23 +240,23 @@ paths:
               name: "Sceptre Monitor"
               price: 149.99
                         
-  /products/search:
-    get:
-      tags:
-        - Product
-      summary: "Retrieve a specific product object"
-      description: "Endpont to retrieve a specific product, requires token authentication"
-      security:
-        - bearerAuth: []
-      responses:
-        200:
-          description: "Successfully product"
-          schema:
-            $ref: "#/definitions/GetProductsResponse"
-          examples:
-            application/json:
-              name: "Toaster"
-              price: 250
+  # /products/search:
+  #   get:
+  #     tags:
+  #       - Product
+  #     summary: "Retrieve a specific product object"
+  #     description: "Endpont to retrieve a specific product, requires token authentication"
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       200:
+  #         description: "Successfully product"
+  #         schema:
+  #           $ref: "#/definitions/GetProductsResponse"
+  #         examples:
+  #           application/json:
+  #             name: "Toaster"
+  #             price: 250
 
 #GetAllOrders Path
   /orders:
@@ -297,43 +297,43 @@ paths:
               customer_id: 2
               product_id: 2
               
-  /orders/<int:customer_id>:
-    get:
-      tags:
-        - Order
-      summary: "Retrieve a specific order by customer id"
-      description: "Endpoint to retrieve a specific order, requires token authentication"
-      security:
-        - bearerAuth: []
-      responses:
-        200:
-          description: "Successfully retrieved order"
-          schema:
-            $ref: "#/definitions/GetOrdersResponse"
-          examples:
-            application/json:
-              order_id: 1
-              customer_id: 2
-              product_id: 2
+  # /orders/<int:customer_id>:
+  #   get:
+  #     tags:
+  #       - Order
+  #     summary: "Retrieve a specific order by customer id"
+  #     description: "Endpoint to retrieve a specific order, requires token authentication"
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       200:
+  #         description: "Successfully retrieved order"
+  #         schema:
+  #           $ref: "#/definitions/GetOrdersResponse"
+  #         examples:
+  #           application/json:
+  #             order_id: 1
+  #             customer_id: 2
+  #             product_id: 2
               
-  /orders/customer-email:
-    get:
-      tags:
-        - Order
-      summary: "Retrieve a specific order by customer email address"
-      description: "Endpoint to retrieve a specific order, requires token authentication"
-      security:
-        - bearerAuth: []
-      responses:
-        200:
-          description: "Successfully retrieved order"
-          schema:
-            $ref: "#/definitions/GetOrdersResponse"
-          examples:
-            application/json:
-              order_id: 1
-              customer_id: 2
-              product_id: 2
+  # /orders/customer-email:
+  #   get:
+  #     tags:
+  #       - Order
+  #     summary: "Retrieve a specific order by customer email address"
+  #     description: "Endpoint to retrieve a specific order, requires token authentication"
+  #     security:
+  #       - bearerAuth: []
+  #     responses:
+  #       200:
+  #         description: "Successfully retrieved order"
+  #         schema:
+  #           $ref: "#/definitions/GetOrdersResponse"
+  #         examples:
+  #           application/json:
+  #             order_id: 1
+  #             customer_id: 2
+  #             product_id: 2
 
 #Payloads and Responses
 definitions: 

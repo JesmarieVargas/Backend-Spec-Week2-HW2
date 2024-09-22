@@ -2,11 +2,11 @@ from flask import request, jsonify
 from models.schemas.orderSchema import order_schema, orders_schema
 from services import orderService
 from marshmallow import ValidationError
-from cache import cache
+
 
 from utils.util import admin_required, user_validation
 
-
+@user_validation
 def save(token_id): 
 
     try:
@@ -22,6 +22,7 @@ def save(token_id):
 
 
 # @cache.cached(timeout=120)
+@admin_required
 def find_all():
     all_orders = orderService.find_all()
 

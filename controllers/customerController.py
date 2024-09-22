@@ -1,10 +1,10 @@
 from flask import request, jsonify
-from models.schemas.customerSchema import customer_schema, customers_schema, customer_login
+from models.schemas.customerSchema import customer_schema, customers_schema, customer_login, customer_cart
 from services import customerService
 from marshmallow import ValidationError
-from cache import cache
 from utils.util import token_required
 from models.shoppingCart import cart
+
 
 
 def save(): #name the controller the same as the service it recruites
@@ -48,7 +48,7 @@ def login():
     else:
         return jsonify({"status": "error", "message": "invalid username or password"}), 404
     
-@token_required   
+@token_required
 def add_item_to_cart():
     try:
         item_data = request.json
@@ -66,13 +66,9 @@ def remove_item_from_cart():
     return customer_schema.jsonify(customer), 200
 
 @token_required
-def view_cart():
-    try:
-        item_data = request.json
-    except ValidationError as e:
-        return jsonify(e.messages), 400
-    cart = customerService.view_cart(item_data)
-    return cart, 200
+def view_cart(customer_id):
+    customer = customerService.view_cart(customer_id)
+    return customer_cart.jsonify(customer), 200
     
 @token_required
 def empty_cart():

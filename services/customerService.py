@@ -63,15 +63,10 @@ def remove_item_from_cart(item_data):
     return customer
 
 
-def view_cart(item_data):
-    query = select(Customer).where(Customer.id==item_data['customer_id'])
+def view_cart(customer_id):
+    query = select(Customer).where(Customer.id==customer_id)
     customer = db.session.execute(query).scalar()
-    all_cart_items = customer.cart
-    cart = []
-    for item in all_cart_items:
-        print(item.product_name)
-        cart.append(item.product_name)
-    return cart
+    return customer
 
 
 def empty_cart(item_data):
